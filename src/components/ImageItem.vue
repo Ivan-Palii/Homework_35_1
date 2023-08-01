@@ -16,11 +16,6 @@ const props = defineProps({
 		required: true,
 	},
 })
-
-function showImgData() {
-	console.log(Object.keys(props.img))
-	console.log(props.img.id)
-}
 </script>
 <style
 	scoped

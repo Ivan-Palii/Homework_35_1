@@ -36,17 +36,6 @@ function getImages() {
 	)
 }
 
-function decrementPage() {
-	if (page.value > 1) page.value--
-
-	getImages()
-}
-
-function incrementPage() {
-	if (page.value < MAX_PAGE.value) page.value++
-
-	getImages()
-}
 
 function getPreviousPage() {
 	if (page.value > 1)
@@ -79,15 +68,12 @@ getImages()
 			<div class="main__control-btns">
 				<a
 					:href="'photos?_page='+getPreviousPage()+'&_limit='+currentLimit"
-					:page="page"
 					class="btn left"
-					@click="decrementPage"
 				>&#x003C;
 				</a>
 				<a
 					:href="'photos?_page='+getNextPage()+'&_limit='+currentLimit"
 					class="btn right"
-					@click="incrementPage"
 				>&#x003E;
 				</a>
 			</div>
