@@ -12,7 +12,7 @@ const route = useRoute(); // для витягування інформації 
 
 const images = ref([]);
 
-const isQueryValid = computed(() => { // валідація query-параметрів, почитай про computed
+const isQueryValid = computed(() => {
 	return (
 		route.query?._page > 0 &&
 		route.query?._page <= MAX_PAGE &&
@@ -21,25 +21,25 @@ const isQueryValid = computed(() => { // валідація query-парамет
 	);
 });
 
-const params = reactive({ // reactive - аналог реф, але тільки для об'єктів, почитай про це
+const params = reactive({
+	// reactive - аналог реф, але тільки для об'єктів, почитай про це
 	page: isQueryValid.value ? route.query?._page : 1,
 	limit: isQueryValid.value ? route.query?._limit : 8
 });
+
+const goTo = () =>
+	router.push({ query: { _page: params.page, _limit: params.limit } });
 
 if (!isQueryValid.value) goTo(); // якщо query не валідні - перенаправляємо на дефолтну сторінку
 
 watch( // для слідкування за змінами params, почитай про це
 	params,
 	async () => {
-		
 		goTo();
 		await getImages();
 	},
 	{ immediate: true } // для запуску watch під час рендеру сторінки
 );
-
-const goTo = () =>
-	router.push({ query: { _page: params.page, _limit: params.limit } });
 
 async function getImages() {
 	try {
